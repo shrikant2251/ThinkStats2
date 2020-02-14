@@ -32,8 +32,9 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return sorted(hist.Items(), key=itemgetter(1), reverse=True)
-
+    X = sorted(hist.Items(), key=itemgetter(1), reverse=True)
+    print(X)
+    return X
 
 def WeightDifference(live, firsts, others):
     """Explore the difference in weight between first babies and others.

@@ -9,10 +9,10 @@ from __future__ import print_function
 
 import sys
 from operator import itemgetter
-
+import numpy as np
 import first
 import thinkstats2
-
+import operator
 
 def Mode(hist):
     """Returns the value with the highest frequency.
@@ -21,7 +21,13 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
+    freq_l = 0
+    mode = 0
+    for val,freq in hist.Items():
+        if freq_l < freq:
+           freq_l = freq
+           mode = val
+    return mode
 
 
 def AllModes(hist):
@@ -31,8 +37,18 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
+    dictVF = {}
+    for val,freq in hist.Items():
+       dictVF[val] = freq
+    dictVF = dict(sorted(dictVF.items(), key=operator.itemgetter(1),reverse=True))
+    res = np.array(list(dictVF.items()))
+    print(res)
+    return res
 
+def light_heavy(firsts,others):
+    print(firsts.totalwgt_lb.mean(),others.totalwgt_lb.mean())
+    print(thinkstats2.CohenEffectSize(firsts.totalwgt_lb,others.totalwgt_lb))
+    return ""
 
 def main(script):
     """Tests the functions in this module.
@@ -53,6 +69,8 @@ def main(script):
 
     for value, freq in modes[:5]:
         print(value, freq)
+    
+    light_heavy(firsts,others)
 
     print('%s: All tests passed.' % script)
 

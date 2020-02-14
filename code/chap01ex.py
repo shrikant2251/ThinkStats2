@@ -14,6 +14,10 @@ import nsfg
 import thinkstats2
 
 
+def readResp():
+
+	
+
 def main(script):
     """Tests the functions in this module.
 
